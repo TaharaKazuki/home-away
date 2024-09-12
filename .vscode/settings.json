@@ -24,7 +24,8 @@
     "openai",
     "shadcn",
     "signin",
-    "tailwindcss"
+    "tailwindcss",
+    "trpc"
   ],
   "tailwindCSS.experimental.classRegex": [
     ["ctl\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
