@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { links } from '@/utils/links';
 
-function LinksDropdown() {
+const LinksDropdown = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -29,7 +29,7 @@ function LinksDropdown() {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+};
 
 const SignInStatus = () => {
   return (
