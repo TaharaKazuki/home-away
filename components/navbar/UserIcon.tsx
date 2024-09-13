@@ -11,8 +11,8 @@ async function UserIcon() {
       <Image
         alt="profile image"
         src={profileImage}
-        width={100}
-        height={100}
+        width={200}
+        height={200}
         className="size-6 rounded-full object-cover"
       />
     );
