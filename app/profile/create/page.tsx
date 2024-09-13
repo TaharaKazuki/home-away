@@ -1,6 +1,5 @@
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { SubmitButton } from '@/components/form/Button';
+import FormInput from '@/components/form/FormInput';
 
 const createProfileAction = async (formData: FormData) => {
   'use server';
@@ -15,12 +14,11 @@ function CreateProfilePage() {
       <div className="max-w-lg rounded-md border p-8">
         <form action={createProfileAction}>
           <div className="mb-2">
-            <Label htmlFor="firstName">First Name</Label>
-            <Input id="firstName" name="firstName" type="text" />
+            <FormInput type="text" name="firstName" label="First Name" />
+            <FormInput type="text" name="lastName" label="Last Name" />
+            <FormInput type="text" name="username" label="Username" />
           </div>
-          <Button type="submit" size="lg">
-            Create Profile
-          </Button>
+          <SubmitButton text="Create Profile" className="mt-8" />
         </form>
       </div>
     </section>
