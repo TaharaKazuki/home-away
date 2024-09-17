@@ -45,9 +45,7 @@ export const createProfileAction = async (
       },
     });
   } catch (error) {
-    return {
-      message: error instanceof Error ? error.message : 'An error occurred',
-    };
+    return renderError(error);
   }
   redirect('/');
 };
@@ -102,3 +100,5 @@ export const updateProfileAction = async (
     return renderError(error);
   }
 };
+
+export const updateProfileImageAction = () => {};
