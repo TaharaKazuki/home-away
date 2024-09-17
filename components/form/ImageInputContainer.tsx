@@ -8,7 +8,7 @@ import { SubmitButton } from './Button';
 import FormContainer from './FormContainer';
 import ImageInput from './ImageInput';
 import { Button } from '@/components/ui/button';
-import { actionFunction } from '@/utils/types';
+import { type actionFunction } from '@/utils/types';
 
 type ImageInputContainerProps = {
   image: string;
