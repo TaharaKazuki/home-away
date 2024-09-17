@@ -24,6 +24,7 @@
     "openai",
     "shadcn",
     "signin",
+    "supabase",
     "tailwindcss",
     "trpc"
   ],

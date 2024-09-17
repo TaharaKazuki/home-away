@@ -5,7 +5,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import db from './db';
-import { profileSchema, validationWithZodSchema } from './schemas';
+import { imageSchema, profileSchema, validationWithZodSchema } from './schemas';
 
 const getAuthUser = async () => {
   const user = await currentUser();
@@ -105,5 +105,9 @@ export const updateProfileImageAction = async (
   prevState: any,
   formData: FormData
 ): Promise<{ message: string }> => {
+  const image = formData.get('image') as File;
+  const validationFields = validationWithZodSchema(imageSchema, { image });
+  console.info(validationFields);
+
   return { message: 'Profile image update successfully' };
 };
