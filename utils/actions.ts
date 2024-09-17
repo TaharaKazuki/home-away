@@ -1,16 +1,23 @@
 'use server';
 
 import { clerkClient, currentUser } from '@clerk/nextjs/server';
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import db from './db';
-import { profileSchema } from './schemas';
+import { profileSchema, validationWithZodSchema } from './schemas';
 
 const getAuthUser = async () => {
   const user = await currentUser();
   if (!user) throw new Error('You must be logged in to access this route');
   if (!user.privateMetadata.hasProfile) redirect('/profile/create');
   return user;
+};
+
+const renderError = (error: unknown): { message: string } => {
+  return {
+    message: error instanceof Error ? error.message : 'An error occurred',
+  };
 };
 
 export const createProfileAction = async (
@@ -68,7 +75,30 @@ export const fetchProfile = async () => {
       clerkId: user.id,
     },
   });
-
   if (!profile) redirect('/profile/create');
   return profile;
+};
+
+export const updateProfileAction = async (
+  prevState: any,
+  formData: FormData
+): Promise<{ message: string }> => {
+  const user = await getAuthUser();
+
+  try {
+    const rawData = Object.fromEntries(formData);
+    const validationFields = validationWithZodSchema(profileSchema, rawData);
+
+    await db.profile.update({
+      where: {
+        clerkId: user.id,
+      },
+      data: validationFields,
+    });
+
+    revalidatePath('/profile');
+    return { message: 'Profile updated successfully' };
+  } catch (error) {
+    return renderError(error);
+  }
 };
